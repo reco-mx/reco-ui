@@ -1,0 +1,14 @@
+.banner{
+    background-image: url('../../assets/background-food.jpg');
+    background-position: left;
+    background-size: cover;
+    padding: 10%;
+    margin: 2%;
+    border-radius: 4px;
+    .icon{
+        svg{
+            font-size: 25px;
+        }
+        
+    }
+}
