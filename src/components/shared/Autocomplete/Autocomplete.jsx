@@ -1,5 +1,6 @@
 import React from "react";
 import './Autocomplete.scss'
+import { IoIosAddCircleOutline } from "react-icons/io";
 class Autocomplete extends React.Component {
   constructor(props) {
     super(props);
@@ -83,9 +84,14 @@ class Autocomplete extends React.Component {
       }
     }
   }
-  addData(e){
-    this.props.add(e);
-    this.state.query='';
+  addData(e, value){
+    this.props.add(value);
+    this.setState({
+      matches: [],
+      query: "",
+      selected: false
+    })
+    e.preventDefault();
   }
 
   render() {
@@ -126,7 +132,7 @@ class Autocomplete extends React.Component {
               )}
             </div>
           </div>
-          <button class="button is-link" onClick={ (e)=>{ e.preventDefault(); this.addData(this.state.query)}}>Agregar</button>
+          <button className="button is-link" onClick={ (e)=>{ this.addData(e,this.state.query)}}><IoIosAddCircleOutline></IoIosAddCircleOutline></button>
         </div>
       </div>
     );

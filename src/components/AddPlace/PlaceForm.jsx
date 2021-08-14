@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './placeForm.scss';
 import Autocomplete from '../shared/Autocomplete/Autocomplete'
+import { db } from '../../firebase';
 const PlaceForm = () => {
     const [placeData, setPlaceData] = useState({
         name:'',
@@ -31,10 +32,21 @@ const PlaceForm = () => {
         ];
 
     const addTag = (value) =>{
-        setPlaceData((prevState)=>({
+        if ( value.length > 0 ){
+           setPlaceData((prevState)=>({
             ...prevState,
             [tags]: placeData.tags.push(value)
-        }));
+        }));  
+        }
+    }
+    const submitData = () => {
+        db.collection('places').add(placeData);
+    }
+    const handleChange = ({target:{name, value}}) => {
+        setPlaceData((prevState)=>({
+            ...prevState,
+            [name]:value
+        }))
     }
     return (
         <div className='place-form'>
@@ -42,26 +54,25 @@ const PlaceForm = () => {
                 <div className="column is-two-fifths">
                     <form action="submit">
                     <div className="control field">
-                        <input className="input" type="text" placeholder="Nombre"/>
+                        <input name='name' value={placeData.name} onChange={handleChange} className="input" type="text" placeholder="Nombre"/>
                     </div>
                     <div className="select field">
-                        <select>
+                        <select name='munic'>
                             <option>Municipio</option>
                             {
                                 municipios.map((item) => {
                                     return(
-                                        <option key={item.id}>{item.name}</option>
+                                        <option value={item.name} key={item.id}>{item.name}</option>
                                     )
-                                    
                                 })
                             }
                         </select>
                     </div>
                     <div className="control field">
-                        <input className="input" type="text" placeholder="URL Instagram"/>
+                        <input name='ig' value={placeData.ig} onChange={handleChange} className="input" type="text" placeholder="URL Instagram"/>
                     </div>
                     <div className="control field">
-                        <input className="input" type="text" placeholder="URL Facebook"/>
+                        <input name='fb' value={placeData.fb} onChange={handleChange} className="input" type="text" placeholder="URL Facebook"/>
                     </div>
                     <Autocomplete
                     className='field'
@@ -71,8 +82,23 @@ const PlaceForm = () => {
                         data={tags}
                         add={(e)=>{addTag(e)}}
                     />
+                    {
+                        placeData.tags.length > 0 ?
+                        <div className='tag-group'>
+                        {
+                            placeData.tags.map((item)=>(
+                            <span class="tag is-info">{item}</span>
+                            ))
+                        }
+                    </div> : null
+                    }
+                    <div className="submit-button">
+                    <button class="button is-danger">Agregar</button>
+                    </div>
                   
                     </form>
+                    
+                    
                 </div>
             </div>
         </div>
