@@ -13,7 +13,7 @@ const Header = () => {
                    </div>
                </div>
                <div className="navbar-menu">
-                   <a className='navbar-item' href="#"> Home </a>
+                 
                </div>
             </nav>
         </div>

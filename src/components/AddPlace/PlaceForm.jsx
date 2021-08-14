@@ -1,8 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './placeForm.scss';
 import Autocomplete from '../shared/Autocomplete/Autocomplete'
 const PlaceForm = () => {
-
+    const [placeData, setPlaceData] = useState({
+        name:'',
+        munic:'',
+        ig:'',
+        fb:'',
+        tags:[]
+    })
     const municipios = [
         {name:'Monterrey', id: 0},
         {name: 'San Nicolás', id: 1},
@@ -24,6 +30,12 @@ const PlaceForm = () => {
         "Cookies", "Galletas", "Ensaladas", "Healthy", "Fit", "Food truck", "Panadería", "Bakery", 
         ];
 
+    const addTag = (value) =>{
+        setPlaceData((prevState)=>({
+            ...prevState,
+            [tags]: placeData.tags.push(value)
+        }));
+    }
     return (
         <div className='place-form'>
             <div className="columns">
@@ -45,12 +57,19 @@ const PlaceForm = () => {
                             }
                         </select>
                     </div>
+                    <div className="control field">
+                        <input className="input" type="text" placeholder="URL Instagram"/>
+                    </div>
+                    <div className="control field">
+                        <input className="input" type="text" placeholder="URL Facebook"/>
+                    </div>
                     <Autocomplete
                     className='field'
                         name="tags"
                         label="tags"
                         placeholder="Agrega etiquetas a tu restaurant"
                         data={tags}
+                        add={(e)=>{addTag(e)}}
                     />
                   
                     </form>

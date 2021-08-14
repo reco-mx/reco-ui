@@ -1,7 +1,5 @@
 .banner{
-    background-image: url('../../assets/background-food.jpg');
-    background-position: left;
-    background-size: cover;
+    background-color: rgb(255, 14, 78);
     padding: 10%;
     margin: 2%;
     border-radius: 4px;
@@ -10,5 +8,14 @@
             font-size: 25px;
         }
         
+    }
+    .title{
+        font-family: 'Poppins', sans-serif;;
+        color: white;
+        font-weight: bold;
+        font-size: 40px;
+        h3{
+            text-align: center;
+        }
     }
 }

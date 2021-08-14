@@ -5,6 +5,11 @@ const Banner = () => {
     return(
         <div>
             <div className='banner'>
+                <div className='title'>
+                    <h3>
+                        Te recomendamos lo que no sabías que querías
+                    </h3>
+                </div>
                 <div className="field">
                     <p className="control has-icons-left">
                         <input className="input" type="text" placeholder="¿Qué estás buscando?"/>

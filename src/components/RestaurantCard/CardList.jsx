@@ -28,12 +28,14 @@ const CardList = () => {
 
     return(
         <div className='card-list'>
+            
             <div className="columns  is-vcentered">
+                
                 {
                     places.map((item) =>{
                         return(
                             <div className="column is-3">
-                                <RestaurantCard name={item.name} location={item.location} tags={item.tags}/>
+                                <RestaurantCard name={item.name} location={item.location} tags={item.tags} ig={item.ig} fb={item.fb}/>
                             </div>
                              
                         )       

@@ -1,11 +1,22 @@
 .card{
     .subtitle{
-        font-size: 12px;
+        font-size: 14px;
     }
     .tag{
         margin: 1%;
         font-size: 14px;
         border-radius: 50px;
+        font-weight: bold;
+    }
+
+    .ig-link{
+        color: rgb(255, 0, 119);
+        font-weight: bold;
+        &:hover{
+            color: black;
+        }
+    }
+    .fb-link{
         font-weight: bold;
     }
 }

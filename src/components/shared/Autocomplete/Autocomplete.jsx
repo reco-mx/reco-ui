@@ -1,5 +1,5 @@
 import React from "react";
-
+import './Autocomplete.scss'
 class Autocomplete extends React.Component {
   constructor(props) {
     super(props);
@@ -83,6 +83,10 @@ class Autocomplete extends React.Component {
       }
     }
   }
+  addData(e){
+    this.props.add(e);
+    this.state.query='';
+  }
 
   render() {
     const { label, name, placeholder } = this.props;
@@ -122,6 +126,7 @@ class Autocomplete extends React.Component {
               )}
             </div>
           </div>
+          <button class="button is-link" onClick={ (e)=>{ e.preventDefault(); this.addData(this.state.query)}}>Agregar</button>
         </div>
       </div>
     );
