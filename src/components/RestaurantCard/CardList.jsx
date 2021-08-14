@@ -11,12 +11,10 @@ const CardList = () => {
         db.collection('places').onSnapshot((querySnapshot) => {
             const places = [];
             querySnapshot.forEach((item) => {
-                console.log(item.data());
                 places.push({...item.data(), id:item.id})
             })
 
             setPlaces(places)
-            console.log(places);
         });
     }
 
