@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import './placeForm.scss';
 import Autocomplete from '../shared/Autocomplete/Autocomplete'
+import { FiX } from "react-icons/fi";
+
 import { db } from '../../firebase';
 const PlaceForm = () => {
     const [placeData, setPlaceData] = useState({
         name:'',
-        munic:'',
+        location:'',
         ig:'',
         fb:'',
         tags:[]
@@ -28,7 +30,8 @@ const PlaceForm = () => {
         "Boneless", "Alitas", "Churros", "Pan dulce", "Elotes", "Snack", "Fries", "Papas a la francesa", 
         "Brownies", "Cake", "Pasteles", "Donas", "Comida mexicana", "Pays", "BBQ", "Cerveza", "Cheve", "Desayunos", 
         "Buffet", "Hotcakes", "Café", "Frappe", "Malteadas", "Waffles", "Queso", "Mariscos", "Seafood", "Noodles", 
-        "Cookies", "Galletas", "Ensaladas", "Healthy", "Fit", "Food truck", "Panadería", "Bakery", 
+        "Cookies", "Galletas", "Ensaladas", "Healthy", "Fit", "Food truck", "Panadería", "Bakery", "Pasteles", 
+        "Comida China", "Chocolate", "Pollo Asado", "Sushi", ""
         ];
 
     const addTag = (value) =>{
@@ -39,8 +42,20 @@ const PlaceForm = () => {
         }));  
         }
     }
+
+    const clearForm = () => {
+        setPlaceData({
+        name:'',
+        location:'',
+        ig:'',
+        fb:'',
+        tags:[]
+        })
+    }
     const submitData = () => {
-        db.collection('places').add(placeData);
+         db.collection('places').add(placeData); 
+         clearForm();
+    
     }
     const handleChange = ({target:{name, value}}) => {
         setPlaceData((prevState)=>({
@@ -48,6 +63,14 @@ const PlaceForm = () => {
             [name]:value
         }))
     }
+   const  deleteTag = (tag) => {
+        const list = placeData.tags;
+        list.splice(list.indexOf(tag), list.indexOf(tag)+1);
+        setPlaceData((prevState)=>({
+            ...prevState,
+            [tags]: list
+        }));  
+   }
     return (
         <div className='place-form'>
             <div className="columns">
@@ -57,7 +80,7 @@ const PlaceForm = () => {
                         <input name='name' value={placeData.name} onChange={handleChange} className="input" type="text" placeholder="Nombre"/>
                     </div>
                     <div className="select field">
-                        <select name='munic'>
+                        <select name='location' onChange={handleChange} value={placeData.location}>
                             <option>Municipio</option>
                             {
                                 municipios.map((item) => {
@@ -87,13 +110,13 @@ const PlaceForm = () => {
                         <div className='tag-group'>
                         {
                             placeData.tags.map((item)=>(
-                            <span class="tag is-info">{item}</span>
+                            <span class="tag is-info">{item} <FiX onClick={()=>{deleteTag(item)}}></FiX> </span>
                             ))
                         }
                     </div> : null
                     }
                     <div className="submit-button">
-                    <button class="button is-danger">Agregar</button>
+                    <button class="button is-danger" onClick={(e)=>{ e.preventDefault(); submitData()}}>Agregar</button>
                     </div>
                   
                     </form>
