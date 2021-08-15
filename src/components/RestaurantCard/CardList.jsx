@@ -32,7 +32,7 @@ const CardList = () => {
                 {
                     places.map((item) =>{
                         return(
-                            <div className="column is-3">
+                            <div className="column">
                                 <RestaurantCard name={item.name} location={item.location} tags={item.tags} ig={item.ig} fb={item.fb}/>
                             </div>
                              
