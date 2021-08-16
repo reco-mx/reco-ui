@@ -7,7 +7,7 @@ const Banner = () => {
             <div className='banner'>
                 <div className='title'>
                     <h3>
-                        Te recomendamos lo que no sabías que querías
+                        ¿QUÉ SE SE TE ANTOJA?
                     </h3>
                 </div>
                 <div className="field">
