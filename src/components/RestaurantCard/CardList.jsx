@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react';
 import RestaurantCard from './RestaurantCard'
 import { db } from '../../firebase'
 import './CardList.scss'
+import MainFilter from './MainFilter/MainFilter';
 
 
 const CardList = () => {
@@ -26,13 +27,12 @@ const CardList = () => {
 
     return(
         <div className='card-list'>
-            
-            <div className="columns  is-vcentered">
-                
+            <MainFilter/>
+            <div className="columns is-gapless is-multiline ">
                 {
                     places.map((item) =>{
                         return(
-                            <div className="column">
+                            <div className="column is-one-quarter">
                                 <RestaurantCard name={item.name} location={item.location} tags={item.tags} ig={item.ig} fb={item.fb}/>
                             </div>
                              

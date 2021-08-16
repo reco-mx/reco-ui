@@ -12,18 +12,19 @@ import RestaurantCard from './components/RestaurantCard/RestaurantCard';
 import CardList from './components/RestaurantCard/CardList';
 import Banner from './components/Banner/Banner'
 import PlaceForm from './components/AddPlace/PlaceForm'
+import Footer from './components/Footer/Fotter';
 function App() {
   return (
 
     
     <div className="App">
-      
     <Router>
       <Header/>
       <Switch>
         <Route path ="/home">
           <Banner/>
           <CardList/>
+          <Footer/>
         </Route>
         <Route path="/admin-add">
           <PlaceForm/>
